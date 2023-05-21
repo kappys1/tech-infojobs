@@ -1,0 +1,15 @@
+.marker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 5px solid #f44336;
+    border-radius: 40px;
+    background-color: white;
+    text-align: center;
+    color: #3f51b5;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px;
+}
