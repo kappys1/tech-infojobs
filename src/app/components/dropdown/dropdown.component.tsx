@@ -1,3 +1,4 @@
+
 'use client'
 import { Facet, FacetValue } from '@/app/model/filters'
 import { Dropdown, DropdownOptions } from 'flowbite'
@@ -93,7 +94,7 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
           </DropdownItemComponent>
           {facet.values.map((value: FacetValue) => (
             <DropdownItemComponent onClick={() => handlerClickItem(value)} key={`filter-${value.key}-${value.key}`}>
-              {value.value} ({value.count})
+              {value.value} {value.count && `(${value.count})`}
             </DropdownItemComponent>
           ))}
         </ul>
