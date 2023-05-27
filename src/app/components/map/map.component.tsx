@@ -2,17 +2,12 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 'use client'
-
 import { MapOffer } from '@/app/model/mapOffer'
 import GoogleMap from 'google-maps-react-markers'
 import { useCallback, useEffect, useRef, useState } from 'react'
+
 import Supercluster from 'supercluster'
 import { Marker } from '../marker/marker.component'
-
-const containerStyle = {
-  width: '100%',
-  height: '700px'
-}
 
 interface MapComponentProps {
   mapOffers: MapOffer[]
@@ -53,25 +48,21 @@ export default function Map ({ mapOffers, points }: MapComponentProps) {
     mapRef.current?.panTo({ lat: latitude, lng: longitude })
   }
 
-  useEffect(() => {
-    console.log('render')
-  })
-
   const handleApiLoaded = useCallback(({ map, maps }) => {
     // use map and maps objects
     mapRef.current = map
   }, [])
 
   return (
-    // Important! Always set the container height explicitly
-    <div style={containerStyle}>
+  // Important! Always set the container height explicitly
+
+    <div className='w-full h-full min-h-[700px]'>
       <GoogleMap
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
         defaultCenter={defaultProps.center}
         defaultZoom={10}
         onGoogleApiLoaded={handleApiLoaded}
         onChange={({ bounds, zoom }) => {
-          console.log(bounds)
           const ne = bounds.getNorthEast()
           const sw = bounds.getSouthWest()
           setZoom(zoom)
@@ -87,7 +78,6 @@ export default function Map ({ mapOffers, points }: MapComponentProps) {
             sum,
             count
           } = cluster.properties
-
           return (
             isCluster
               ? <Marker
@@ -109,5 +99,6 @@ export default function Map ({ mapOffers, points }: MapComponentProps) {
         })}
       </GoogleMap>
     </div>
+
   )
 }

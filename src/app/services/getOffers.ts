@@ -1,10 +1,13 @@
-import { APIResultOffer, Offer } from '../model/offer';
+import { APIResultOffer, Offer } from '../model/offer'
+import { getDetailOffer } from './getDetailOffer'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
-export async function getAllInfoJobsOffers (page:number = 1, result: APIResultOffer[] =[]): Promise<APIResultOffer[]> {
+export async function getInfoJobsOffers ({ page = 1, queryParams }) {
+  const params = new URLSearchParams(queryParams)
+  const url = `https://api.infojobs.net/api/7/offer?category=informatica-telecomunicaciones&order=updated-desc&maxResults=10&page=${page}&${params.toString()}`
   const res = await fetch(
-    `https://api.infojobs.net/api/7/offer?category=informatica-telecomunicaciones&order=updated&maxResults=100&page=${page}`,
+    url,
     {
       headers: {
         'Content-Type': 'application/json',
@@ -13,33 +16,53 @@ export async function getAllInfoJobsOffers (page:number = 1, result: APIResultOf
     }
   )
 
-  const { items, currentPage, totalPages }: { items: APIResultOffer[], currentPage: number, totalPages:number } = await res.json()
-  // console.log(currentPage, totalPages)
-  // if(currentPage < totalPages) {
-  //   return getAllInfoJobsOffers( currentPage + 1, [...result, ...items])
-  // }
-  return [...result, ...items]
-}
+  const { items }: { items: APIResultOffer[] } = await res.json()
 
-export async function getInfoJobsOffers () {
- 
-  const items: APIResultOffer[] = await getAllInfoJobsOffers()
-  
-  const listOfOffers: Offer[] = items.map((item) => {
-    const { id, title, province, experienceMin, link, teleworking, city, salaryDescription, author } = item
+  const listOfOffers: Offer[] = await Promise.all(items.map(async (item) => {
+    const detailOffer = await getDetailOffer(item.id)
+    const {
+      id,
+      title,
+      province,
+      experienceMin,
+      link,
+      teleworking,
+      city,
+      salaryDescription,
+      bold,
+      workDay,
+      contractType,
+      applications,
+      published,
+      updated,
+      urgent,
+      author,
+      requirementMin
+
+    } = item
 
     return {
       id,
       title,
       province: province.value,
       city,
+      published,
+      bold,
+      applications,
+      urgent,
+      workDay: workDay.value,
       experienceMin: experienceMin.value,
       link,
+      contractType: contractType.value,
+      updated,
+      requirementMin,
       salaryDescription,
       teleworking: teleworking?.value ?? 'No especificado',
-      author
+      author,
+      description: detailOffer.description,
+      highlights: detailOffer.highlights
     }
-  })
+  }))
 
   return listOfOffers
 }

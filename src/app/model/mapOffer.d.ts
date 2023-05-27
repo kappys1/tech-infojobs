@@ -1,11 +1,17 @@
 export interface MapOffer {
-    count:       number;
-    city:        string;
-    province:    string;
-    coordinates: Coordinates;
+  city: City
+  count: number
+  country: string
+  coordinates: Coordinates
+}
+
+export interface City {
+  key: string
+  value: string
+  count: number
 }
 
 export interface Coordinates {
-    lat: number;
-    lng: number;
+  lat?: number
+  lng?: number
 }

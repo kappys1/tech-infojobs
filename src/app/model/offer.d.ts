@@ -1,3 +1,5 @@
+import { Upsellings } from './offerDetail'
+
 interface APIResultOffer {
   id: string
   title: string
@@ -46,9 +48,19 @@ export interface Offer {
   title: string
   province: string
   city: string
+  published: Date
+  updated: Date
+  bold: boolean
+  applications: string
+  requirementMin: string
+  urgent: boolean
+  workDay: string
   experienceMin: string
   link: string
-  teleworking: string
+  contractType: ContractType
   salaryDescription: string
+  teleworking: string
   author: Author
+  description: string
+  highlights: Upsellings
 }

@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import { NavBar } from './components/nav-bar/nav-bar.component'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,13 +17,7 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <header className='py-10'>
-          <h1 className='flex flex-col items-center justify-center text-lg'>
-            <strong className='font-semibold tracking-wider text-black/80'>
-              Info Tech Jobs
-            </strong>
-          </h1>
-        </header>
+        <NavBar />
         {children}
       </body>
     </html>
