@@ -1,17 +1,17 @@
-export interface MapOffer {
-  city: City
-  count: number
-  country: string
-  coordinates: Coordinates
-}
+import { Dictionary } from './dictionary'
 
-export interface City {
-  key: string
-  value: string
-  count: number
+export interface MapOffer extends FacetLocation {
+  coordinates: Coordinates
 }
 
 export interface Coordinates {
   lat?: number
   lng?: number
+}
+
+interface FacetLocation {
+  city: Dictionary
+  province: Dictionary
+  country: Dictionary
+  count: number
 }

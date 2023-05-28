@@ -1,6 +1,16 @@
 import { Upsellings } from './offerDetail'
 
-interface APIResultOffer {
+interface APIResultOffers {
+  currentPage: number
+  pageSize: number
+  totalResults: number
+  currentResults: number
+  totalPages: number
+  items: APIOfferItem[]
+  facets: Facet[]
+}
+
+interface APIOfferItem {
   id: string
   title: string
   province: Category

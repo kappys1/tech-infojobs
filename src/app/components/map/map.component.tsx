@@ -11,14 +11,25 @@ import { Marker } from '../marker/marker.component'
 
 interface MapComponentProps {
   mapOffers: MapOffer[]
-  points: any[]
 }
 
-export default function Map ({ mapOffers, points }: MapComponentProps) {
+export default function Map ({ mapOffers }: MapComponentProps) {
   const mapRef = useRef(null)
   const [bounds, setBounds] = useState([])
   const [clusters, setClusters] = useState([])
   const [zoom, setZoom] = useState(10)
+
+  const points = mapOffers.map(map => ({
+    type: 'Feature',
+    properties: { cluster: false, coordinateId: `${map.city.key}-${map.country.key}`, category: `${map.city.key}-${map.country.key}`, count: map.count },
+    geometry: {
+      type: 'Point',
+      coordinates: [
+        map.coordinates.lng,
+        map.coordinates.lat
+      ]
+    }
+  }))
 
   const index = new Supercluster({
     radius: 75,
@@ -34,6 +45,10 @@ export default function Map ({ mapOffers, points }: MapComponentProps) {
       lng: mapOffers[0]?.coordinates.lng
     }
   }
+
+  useEffect(() => {
+    setClusters(index.getClusters(bounds, zoom))
+  }, [mapOffers])
 
   useEffect(() => {
     setClusters(index.getClusters(bounds, zoom))

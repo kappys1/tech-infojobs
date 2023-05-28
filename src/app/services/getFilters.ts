@@ -7,15 +7,11 @@ interface QueryParams {
 }
 
 export async function getFilters (queryParams: QueryParams = {}) {
-  if (queryParams.order) {
-    delete queryParams.order
-  }
-
-  const query = { q: Object.values(queryParams).join(', ') }
-  const params = new URLSearchParams({ ...query })
-
-  const url = `https://api.infojobs.net/api/7/offer?category=informatica-telecomunicaciones&maxResults=1&facets=1&${params.toString()}`
-  console.log(url)
+  const params = new URLSearchParams(queryParams)
+  params.set('category', 'informatica-telecomunicaciones')
+  params.set('maxResults', '1')
+  params.set('facets', '1')
+  const url = `https://api.infojobs.net/api/7/offer?${params.toString()}`
   const res = await fetch(
     url,
     {
