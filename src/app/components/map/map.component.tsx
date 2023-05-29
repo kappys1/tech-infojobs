@@ -4,72 +4,41 @@
 'use client'
 import { Coordinates, MapOffer } from '@/app/model/mapOffer'
 import GoogleMap from 'google-maps-react-markers'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback } from 'react'
 
-import Supercluster from 'supercluster'
 import { Marker } from '../marker/marker.component'
+import { useInitMap } from './map.hook'
 
-interface MapComponentProps {
+export interface MapComponentProps {
   mapOffers: MapOffer[]
-  center: Coordinates
+  center: Coordinates | undefined
 }
 
 export const Map = ({ mapOffers, center }: MapComponentProps) => {
-  const mapRef = useRef(null)
-  const [bounds, setBounds] = useState([])
-  const [clusters, setClusters] = useState([])
-  const [zoom, setZoom] = useState(10)
-
-  const defaultProps = {
-    center: {
-      lat: center.lat ?? mapOffers[0]?.coordinates.lat,
-      lng: center.lng ?? mapOffers[0]?.coordinates.lng
-    }
-  }
-
-  const points = mapOffers.map(map => ({
-    type: 'Feature',
-    properties: { cluster: false, coordinateId: `${map.city.key}-${map.country.key}`, category: `${map.city.key}-${map.country.key}`, count: map.count },
-    geometry: {
-      type: 'Point',
-      coordinates: [
-        map.coordinates.lng,
-        map.coordinates.lat
-      ]
-    }
-  }))
-
-  const index = new Supercluster({
-    radius: 75,
-    maxZoom: 16,
-    map: props => ({ sum: props.count }),
-    reduce: (accumulated, props) => { accumulated.sum += props.sum }
+  const { clusters, defaultProps, mapRef, setBounds, setZoom, indexCluster, handleApiLoaded } = useInitMap({
+    mapOffers,
+    center
   })
-  index.load(points)
 
-  useEffect(() => {
-    setClusters(index.getClusters(bounds, zoom))
-  }, [bounds, zoom, mapOffers])
+  const createHandleOnClick =
+    (id: number | string | undefined, latitude: number, longitude: number) => () => {
+      const expansionZoom = Math.min(indexCluster.getClusterExpansionZoom(id), 20)
+      mapRef.current?.setZoom && mapRef.current?.setZoom(expansionZoom)
+      mapRef.current?.panTo({ lat: latitude, lng: longitude })
+    }
 
-  useEffect(() => {
-    mapRef.current?.panTo(center ?? defaultProps.center)
-  }, [center])
+  // const handleApiLoaded = ({ map }: any) => {
+  //   // use map and maps objects
+  //   mapRef.current = map
+  // }
 
-  const createHandleOnClick = (id: number, latitude: number, longitude: number) => () => {
-    const expansionZoom = Math.min(
-      index.getClusterExpansionZoom(id),
-      20
-    )
-    mapRef.current?.setZoom && mapRef.current?.setZoom(expansionZoom)
-    mapRef.current?.panTo({ lat: latitude, lng: longitude })
-  }
-
-  const handleApiLoaded = useCallback(({ map, maps }) => {
-    // use map and maps objects
-    mapRef.current = map
+  const handleOnChange = useCallback(({ bounds, zoom }: any) => {
+    const ne = bounds.getNorthEast()
+    const sw = bounds.getSouthWest()
+    setZoom(zoom)
+    setBounds([sw.lng(), sw.lat(), ne.lng(), ne.lat()])
   }, [])
 
-  console.log(center, defaultProps.center)
   return (
   // Important! Always set the container height explicitly
 
@@ -79,43 +48,33 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
         defaultCenter={defaultProps.center}
         defaultZoom={10}
         onGoogleApiLoaded={handleApiLoaded}
-        onChange={({ bounds, zoom }) => {
-          const ne = bounds.getNorthEast()
-          const sw = bounds.getSouthWest()
-          setZoom(zoom)
-          setBounds([
-            sw.lng(), sw.lat(), ne.lng(), ne.lat()
-          ])
-        }}
+        onChange={handleOnChange}
       >
-        {clusters.map(cluster => {
+        {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates
-          const {
-            cluster: isCluster,
-            sum,
-            count
-          } = cluster.properties
-          return (
-            isCluster
-              ? <Marker
-                  key={`cluster-${cluster.id}`}
-                  lat={latitude}
-                  lng={longitude}
-                  onClick={createHandleOnClick(cluster.id, latitude, longitude)}
-                >
+          const { cluster: isCluster, sum, count } = cluster.properties
+          return isCluster
+            ? (
+              <Marker
+                key={`cluster-${cluster.id}`}
+                lat={latitude}
+                lng={longitude}
+                onClick={createHandleOnClick(cluster.id, latitude, longitude)}
+              >
                 {sum}
               </Marker>
-              : <Marker
-                  key={`crime-${cluster.properties.coordinateId}`}
-                  lat={latitude}
-                  lng={longitude}
-                >
+              )
+            : (
+              <Marker
+                key={`crime-${cluster.properties.coordinateId}`}
+                lat={latitude}
+                lng={longitude}
+              >
                 {count}
               </Marker>
-          )
+              )
         })}
       </GoogleMap>
     </div>
-
   )
 }

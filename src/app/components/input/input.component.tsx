@@ -22,7 +22,7 @@ export const Input: FC<InputProps> = ({ label, placeholder, id = 'input' }) => {
   }, 500)
 
   return (
-    <div className='w-full md:w-1/2'>
+    <div className='w-full py-8 px-4 order-2 md:order-1 md:p-0 md:w-1/2'>
       <form
         className='flex items-center'
         onSubmit={(e) => {
