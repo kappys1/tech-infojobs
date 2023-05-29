@@ -1,7 +1,7 @@
 
 import { FilterNavBar } from './components/filter/filter.component'
+import { ListOfOffers } from './components/listOffers/listOffers'
 import { Map } from './components/map/map.component'
-import { ListOfOffers } from './components/table/table'
 import { getMapOffers } from './services/getMapOffers'
 import { getInfoJobsOffers } from './services/getOffers'
 
