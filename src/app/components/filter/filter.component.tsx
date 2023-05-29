@@ -15,7 +15,7 @@ export const FilterNavBar = async ({ context }) => {
   }
 
   return (
-    <div className='max-w-screen-2xl mx-auto w-full'>
+    <div className='max-w-screen-2xl mx-auto w-full sticky top-[4.3rem] z-10'>
       <div className='relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg'>
         <div className='flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4'>
           <div className='flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-full md:flex-row md:space-y-0 md:items-center md:space-x-3'>

@@ -50,6 +50,8 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
     // use map and maps objects
     mapRef.current = map
     console.log(mapRef.current)
+    console.log(mapRef.current && mapRef.current.getDiv())
+    mapRef.current.getDiv().style.position = ''
   }
 
   return { mapRef, bounds, setBounds, clusters, setZoom, defaultProps, indexCluster, handleApiLoaded }

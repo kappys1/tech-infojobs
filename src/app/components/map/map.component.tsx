@@ -42,7 +42,7 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
   return (
   // Important! Always set the container height explicitly
 
-    <div className='w-full h-full min-h-[700px]'>
+    <div className='w-full h-[500px] lg:h-[700px] '>
       <GoogleMap
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
         defaultCenter={defaultProps.center}
