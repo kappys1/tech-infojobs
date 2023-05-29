@@ -19,7 +19,6 @@ interface FacetLocation {
 export const getMapOffers = async ({ page = 1, queryParams = {} }: { page?: number, queryParams: QueryParams }) => {
   queryParams.facets = '1'
   queryParams.maxResults = '1'
-  console.log('map', queryParams)
   const { facets } = await getOffers(page, queryParams)
 
   const facetsCity = facets.filter(facet => facet.key === 'city')[0].values

@@ -2,11 +2,11 @@ import { APIResultOffers, Offer } from '../model/offer'
 import { getDetailOffer } from './getDetailOffer'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
-interface QueryParams {
+export interface QueryParams {
   [key: string]: string
 }
 
-export async function getOffers (page = 1, queryParams: QueryParams = {}) {
+export async function getOffers (page = '1', queryParams: QueryParams = {}) {
   const params = new URLSearchParams(queryParams)
   params.set('category', 'informatica-telecomunicaciones')
   params.set('page', `${page}`)
@@ -14,7 +14,7 @@ export async function getOffers (page = 1, queryParams: QueryParams = {}) {
     params.set('maxResults', '10')
   }
   const url = `https://api.infojobs.net/api/7/offer?${params.toString()}`
-  console.log('url', url)
+
   const res = await fetch(
     url,
     {
@@ -29,7 +29,7 @@ export async function getOffers (page = 1, queryParams: QueryParams = {}) {
   return responseJson
 }
 
-export async function getInfoJobsOffers ({ page = 1, queryParams }: { page: number, queryParams: QueryParams }) {
+export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: string, queryParams: QueryParams }) {
   const { items } = await getOffers(page, queryParams)
   if (!items) {
     return []

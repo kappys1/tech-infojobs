@@ -27,6 +27,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.4.3",
     "react-sticky": "^6.0.3",
     "react-sticky-box": "^2.0.4",
     "react-stickynode": "^4.1.0",

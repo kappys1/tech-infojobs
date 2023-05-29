@@ -3,7 +3,7 @@
 import { Facet, FacetValue } from '@/app/model/filters'
 import { Dropdown, DropdownOptions } from 'flowbite'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useTransition } from 'react'
 import { DropdownItemComponent } from './dropdownItem.component'
 
 interface DropdownComponentProps {
@@ -17,6 +17,8 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
   const targetRef = React.useRef(null)
   const triggerRef = React.useRef(null)
   const dropdown = React.useRef(null)
+  const [isPending, startTransition] = useTransition()
+
   const router = useRouter()
   const [value, setValue] = React.useState<FacetValue | null>(null)
   useEffect(() => {
@@ -41,21 +43,28 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
     const url = new URL(location.href)
     setValue(value)
     url.searchParams.set(facet.key, value.key)
-    router.replace(url.toString(), {
-      forceOptimisticNavigation: true
-    })
-    dropdown.current?.hide()
+    refreshParams(url)
   }
 
   const handlerResetFilter = () => {
     const url = new URL(location.href)
     setValue(null)
     url.searchParams.delete(facet.key)
-    router.replace(url.toString(), {
-      forceOptimisticNavigation: true
-    })
-    dropdown.current?.hide()
+    if (!url.searchParams.has('province') && url.searchParams.has('city')) {
+      url.searchParams.delete('city')
+    }
+    refreshParams(url)
   }
+
+  const refreshParams = (url: URL) => {
+    startTransition(() => {
+      router.replace(url.toString(), {
+        forceOptimisticNavigation: true
+      })
+      dropdown.current?.hide()
+    })
+  }
+
   return (
     <div className='flex flex-col gap-2 justify-center text-center'>
       <button

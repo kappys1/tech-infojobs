@@ -2,9 +2,18 @@
 import { getFilters } from '@/app/services/getFilters'
 
 import { DropdownComponent } from '../dropdown/dropdown.component'
-export const FilterNavBar = async ({context}) => {
-  console.log(context)
+export const FilterNavBar = async ({ context }) => {
+  console.log('search', context)
   const filters = await getFilters(context.searchParams)
+
+  const queryParams = new URLSearchParams(context.searchParams)
+  if (!queryParams.has('province')) {
+    const index = filters.findIndex(val => val.key === 'city')
+    filters.splice(index, 1)
+  }
+  if (!queryParams.has('province') && queryParams.has('city')) {
+    queryParams.delete('city')
+  }
 
   return (
     <div className='max-w-screen-2xl mx-auto w-full'>

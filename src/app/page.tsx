@@ -19,7 +19,7 @@ export default async function Home (context) {
       <nav className='sticky top-[4.3rem] z-10'><FilterNavBar context={context} /></nav>
       <section className='grid grid-cols-10 mt-6 gap-5'>
         <div className='col-span-5'>
-          <ListOfOffers offers={listOfOffers} />
+          <ListOfOffers initOffers={listOfOffers} />
         </div>
         <div className='flex flex-col col-span-5 gap-5'>
           <div className='sticky top-40 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'>
