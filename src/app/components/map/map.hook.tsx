@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Supercluster from 'supercluster'
 import { MapComponentProps } from './map.component'
+import { getNightModeStyles } from './map.utils'
 
 export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
   const mapRef = useRef<any>(null)
@@ -46,12 +47,28 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
     mapRef.current?.panTo(center ?? defaultProps.center)
   }, [center])
 
+  const checkTheme = () => {
+    const theme = localStorage.getItem('color-theme')
+    if (theme === 'dark') {
+      mapRef.current?.setOptions({ styles: getNightModeStyles() })
+    } else {
+      mapRef.current?.setOptions({ styles: {} })
+    }
+  }
+
+  // night mode
+  useEffect(() => {
+
+    const changeDarkMode = () =>  checkTheme();
+
+    window.addEventListener('theme-changed', changeDarkMode)
+    return () => window.removeEventListener('theme-changed', changeDarkMode)
+  }, [])
+
   const handleApiLoaded = ({ map }: any) => {
     // use map and maps objects
     mapRef.current = map
-    console.log(mapRef.current)
-    console.log(mapRef.current && mapRef.current.getDiv())
-    mapRef.current.getDiv().style.position = ''
+    checkTheme();
   }
 
   return { mapRef, bounds, setBounds, clusters, setZoom, defaultProps, indexCluster, handleApiLoaded }

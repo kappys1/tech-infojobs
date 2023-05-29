@@ -8,11 +8,11 @@ export const CardOfferSkeleton = () => {
         <img className='object-cover w-24 h-24 md:w-36 md:h-36 ml-6 rounded-sm' src='/none-logo.jpg' alt='image author' />
         <div className='flex flex-col p-4 leading-normal w-full h-full grow md:self-start'>
           <div className='mt-3 h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4' />
-          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-4' />
-          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5' />
-          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5' />
-          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5' />
-          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]' />
+          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-500 max-w-[360px] mb-4' />
+          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-500 mb-2.5' />
+          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-500 max-w-[330px] mb-2.5' />
+          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-500 max-w-[300px] mb-2.5' />
+          <div className='h-3 bg-gray-200 rounded-full dark:bg-gray-500 max-w-[360px]' />
         </div>
       </div>
     </li>

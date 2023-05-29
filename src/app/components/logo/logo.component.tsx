@@ -1,12 +1,12 @@
 export function Logo () {
   return (
     <svg
-      className='w-32'
+      className='w-32 fill-blue-infojobs-500 dark:fill-blue-infojobs-400'
       xmlns='http://www.w3.org/2000/svg'
       x='0'
       y='0'
       viewBox='0 0 138 34.942'
-      fill='#2088c2'
+
     >
       <g>
         <g>

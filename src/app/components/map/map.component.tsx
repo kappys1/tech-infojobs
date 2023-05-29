@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-closing-tag-location */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 'use client'
+
 import { Coordinates, MapOffer } from '@/app/model/mapOffer'
 import GoogleMap from 'google-maps-react-markers'
 import { useCallback } from 'react'
@@ -27,11 +25,6 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
       mapRef.current?.panTo({ lat: latitude, lng: longitude })
     }
 
-  // const handleApiLoaded = ({ map }: any) => {
-  //   // use map and maps objects
-  //   mapRef.current = map
-  // }
-
   const handleOnChange = useCallback(({ bounds, zoom }: any) => {
     const ne = bounds.getNorthEast()
     const sw = bounds.getSouthWest()
@@ -49,6 +42,7 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
         defaultZoom={7}
         onGoogleApiLoaded={handleApiLoaded}
         onChange={handleOnChange}
+        sty
         options={{
           disableDefaultUI: true,
           fullscreenControl: true,

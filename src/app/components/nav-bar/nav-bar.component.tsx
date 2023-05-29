@@ -1,5 +1,6 @@
 import { Input } from '../input/input.component'
 import { Logo } from '../logo/logo.component'
+import { ThemeSwitcherComponent } from '../themeSwitcher/themeSwitcher.component'
 import { NavBarLink } from './nav-bar-link.component'
 
 export const NavBar = () => {
@@ -7,7 +8,7 @@ export const NavBar = () => {
     <nav className='bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10'>
       <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
         <a href='/' className='flex items-center gap-1'>
-          <span className='pb-[0.3rem] self-center text-blue-infojobs-500 text-3xl font-bold whitespace-nowrap dark:text-white'>Tech</span>
+          <span className='pb-[0.3rem] self-center text-blue-infojobs-500 text-3xl font-bold whitespace-nowrap dark:text-gray-50'>Tech</span>
           <Logo />
         </a>
         <Input label='Search' placeholder='Busca tu oferta de empleo por puesto, empresa o palabra clave' id='search' />
@@ -18,6 +19,7 @@ export const NavBar = () => {
         <div className='hidden w-full md:block md:w-auto md:order-2' id='navbar-default'>
           <ul className='font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
             <NavBarLink href='https://www.infojobs.net/'>Infojobs</NavBarLink>
+            <ThemeSwitcherComponent />
           </ul>
         </div>
       </div>

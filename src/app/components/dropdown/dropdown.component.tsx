@@ -1,4 +1,3 @@
-
 'use client'
 import { Facet, FacetValue } from '@/app/model/filters'
 import { Dropdown, DropdownOptions } from 'flowbite'
@@ -13,7 +12,9 @@ interface DropdownComponentProps {
   onChange?: (value: FacetValue) => void
 }
 
-export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownComponentProps>> = ({ children, options, label, facet }) => {
+export const DropdownComponent: React.FC<
+React.PropsWithChildren<DropdownComponentProps>
+> = ({ children, options, label, facet }) => {
   const targetRef = React.useRef(null)
   const triggerRef = React.useRef(null)
   const dropdown = React.useRef(null)
@@ -31,7 +32,9 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
     const query = new URLSearchParams(location.search)
     const value = query.get(facet.key)
     if (value) {
-      const facetValue = facet.values.find((facetValue) => facetValue.key === value)
+      const facetValue = facet.values.find(
+        (facetValue) => facetValue.key === value
+      )
       if (facetValue) {
         setValue(facetValue)
       }
@@ -64,14 +67,16 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
   }
 
   return (
-    <div className='flex flex-col gap-2 justify-center text-center'>
+    <div className='flex flex-col gap-2 justify-center text-center pb-4 2xl:p-0 '>
       <button
         ref={triggerRef}
         id='dropdownBottomButton'
-        className='text-blue-infojobs-500 bg-white hover:bg-blue-infojobs-500 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+        className='text-blue-infojobs-500 bg-white hover:bg-blue-infojobs-600 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:text-blue-infojobs-50 dark:bg-blue-infojobs-500 dark:hover:bg-blue-infojobs-600 dark:focus:ring-blue-800'
         type='button'
       >
-        <p className={`${value?.value ? 'font-bold' : ''}`}>{value?.value ?? facet.name}</p>
+        <p className={`${value?.value ? 'font-bold' : ''}`}>
+          {value?.value ?? facet.name}
+        </p>
         <svg
           className='w-4 h-4 ml-2'
           aria-hidden='true'
@@ -96,11 +101,17 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
           className='py-2 text-sm text-gray-700 dark:text-gray-200'
           aria-labelledby='dropdownBottomButton'
         >
-          <DropdownItemComponent onClick={() => handlerResetFilter()} key={`filter-${facet.key}-reset`}>
+          <DropdownItemComponent
+            onClick={() => handlerResetFilter()}
+            key={`filter-${facet.key}-reset`}
+          >
             <b>{facet.name}</b>
           </DropdownItemComponent>
           {facet.values.map((value: FacetValue) => (
-            <DropdownItemComponent onClick={() => handlerClickItem(value)} key={`filter-${value.key}-${value.key}`}>
+            <DropdownItemComponent
+              onClick={() => handlerClickItem(value)}
+              key={`filter-${value.key}-${value.key}`}
+            >
               {value.value} {value.count && `(${value.count})`}
             </DropdownItemComponent>
           ))}
