@@ -6,10 +6,13 @@ import { useInView } from 'react-intersection-observer'
 import { CardOffer } from '../cardOffer/cardOffer.component'
 import { CardOfferSkeleton } from '../cardOffer/cardOfferSkeleton.component'
 
-export function ListOfOffers (props: { initOffers: Offer[] }, context: any) {
-  const { initOffers } = props
+export function ListOfOffers (
+  props: { initOffers: Offer[], page: number, totalPages: number }
+) {
+  const { initOffers, page = 1, totalPages } = props
   const [offers, setOffers] = useState(initOffers)
-  const [page, setPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(page)
+  const [allPages, setAllPages] = useState(totalPages)
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0
@@ -17,17 +20,18 @@ export function ListOfOffers (props: { initOffers: Offer[] }, context: any) {
 
   useEffect(() => {
     setOffers(initOffers)
-    setPage(1)
+    setCurrentPage(1)
   }, [initOffers])
 
   useEffect(() => {
-    if (inView) {
+    if (inView && currentPage + 1 < allPages) {
       const url = new URL(`${location.origin}/api/getOffers${location.search}`)
       url.searchParams.set('page', `${page + 1}`)
       void fetch(url.toString()).then(async (val: any) => {
-        const res = await val.json()
-        setOffers([...offers, ...res])
-        setPage(page + 1)
+        const { listOfOffers, currentPage, totalPages } = await val.json()
+        setOffers([...offers, ...listOfOffers])
+        setCurrentPage(currentPage)
+        setAllPages(totalPages)
       })
     }
   }, [inView])
@@ -35,15 +39,13 @@ export function ListOfOffers (props: { initOffers: Offer[] }, context: any) {
   return (
     <ul className='w-full lg:max-w-2xl gap-8 flex flex-col justify-center self-center space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400'>
       {offers.map((item, i) => (
-        <CardOffer
-          key={item.id}
-          offer={item}
-        />
+        <CardOffer key={item.id} offer={item} />
       ))}
-      <div ref={ref} key='item-skeleton'>
-        <CardOfferSkeleton />
-      </div>
-
+      {currentPage + 1 < allPages && (
+        <div ref={ref} key='item-skeleton'>
+          <CardOfferSkeleton />
+        </div>
+      )}
     </ul>
   )
 }

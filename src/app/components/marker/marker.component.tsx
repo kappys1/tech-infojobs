@@ -1,6 +1,5 @@
 
 import React from 'react'
-import styles from './marker.module.css'
 
 interface MarkerProps {
   text?: string
@@ -11,5 +10,5 @@ interface MarkerProps {
 }
 
 export const Marker = (props: React.PropsWithChildren<MarkerProps>) => {
-  return <div className={styles.marker} onClick={props.onClick}>{props.children}</div>
+  return <div className='flex justify-center items-center w-3 h-3 border-blue-infojobs-500 border-4 rounded-full bg-white text-blue-infojobs-500 text-md font-bold p-4' onClick={props.onClick}>{props.children}</div>
 }

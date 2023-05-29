@@ -49,6 +49,7 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
   const handleApiLoaded = ({ map }: any) => {
     // use map and maps objects
     mapRef.current = map
+    console.log(mapRef.current)
   }
 
   return { mapRef, bounds, setBounds, clusters, setZoom, defaultProps, indexCluster, handleApiLoaded }

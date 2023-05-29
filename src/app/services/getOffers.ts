@@ -30,7 +30,7 @@ export async function getOffers (page = '1', queryParams: QueryParams = {}) {
 }
 
 export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: string, queryParams: QueryParams }) {
-  const { items } = await getOffers(page, queryParams)
+  const { items, currentPage, totalPages, totalResults } = await getOffers(page, queryParams)
   if (!items) {
     return []
   }
@@ -80,5 +80,5 @@ export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: st
     }
   }))
 
-  return listOfOffers
+  return { listOfOffers, currentPage, totalPages, totalResults }
 }

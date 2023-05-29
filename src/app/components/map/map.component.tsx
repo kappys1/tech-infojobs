@@ -46,9 +46,15 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
       <GoogleMap
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string}
         defaultCenter={defaultProps.center}
-        defaultZoom={10}
+        defaultZoom={7}
         onGoogleApiLoaded={handleApiLoaded}
         onChange={handleOnChange}
+        options={{
+          disableDefaultUI: true,
+          fullscreenControl: true,
+          zoomControl: true,
+          scaleControl: true
+        }}
       >
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates
