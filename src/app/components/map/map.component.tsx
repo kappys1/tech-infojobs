@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 'use client'
-import { MapOffer } from '@/app/model/mapOffer'
+import { Coordinates, MapOffer } from '@/app/model/mapOffer'
 import GoogleMap from 'google-maps-react-markers'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -11,13 +11,21 @@ import { Marker } from '../marker/marker.component'
 
 interface MapComponentProps {
   mapOffers: MapOffer[]
+  center: Coordinates
 }
 
-export default function Map ({ mapOffers }: MapComponentProps) {
+export const Map = ({ mapOffers, center }: MapComponentProps) => {
   const mapRef = useRef(null)
   const [bounds, setBounds] = useState([])
   const [clusters, setClusters] = useState([])
   const [zoom, setZoom] = useState(10)
+
+  const defaultProps = {
+    center: {
+      lat: center.lat ?? mapOffers[0]?.coordinates.lat,
+      lng: center.lng ?? mapOffers[0]?.coordinates.lng
+    }
+  }
 
   const points = mapOffers.map(map => ({
     type: 'Feature',
@@ -39,20 +47,13 @@ export default function Map ({ mapOffers }: MapComponentProps) {
   })
   index.load(points)
 
-  const defaultProps = {
-    center: {
-      lat: mapOffers[0]?.coordinates.lat,
-      lng: mapOffers[0]?.coordinates.lng
-    }
-  }
-
   useEffect(() => {
     setClusters(index.getClusters(bounds, zoom))
-  }, [mapOffers])
+  }, [bounds, zoom, mapOffers])
 
   useEffect(() => {
-    setClusters(index.getClusters(bounds, zoom))
-  }, [bounds, zoom])
+    mapRef.current?.panTo(center ?? defaultProps.center)
+  }, [center])
 
   const createHandleOnClick = (id: number, latitude: number, longitude: number) => () => {
     const expansionZoom = Math.min(
@@ -68,6 +69,7 @@ export default function Map ({ mapOffers }: MapComponentProps) {
     mapRef.current = map
   }, [])
 
+  console.log(center, defaultProps.center)
   return (
   // Important! Always set the container height explicitly
 

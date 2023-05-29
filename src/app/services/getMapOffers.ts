@@ -16,7 +16,7 @@ interface FacetLocation {
   count: number
 }
 
-export const getMapOffers = async ({ page = 1, queryParams = {} }: { page?: number, queryParams: QueryParams }) => {
+export const getMapOffers = async ({ page = '1', queryParams = {} }: { page?: string, queryParams: QueryParams }) => {
   queryParams.facets = '1'
   queryParams.maxResults = '1'
   const { facets } = await getOffers(page, queryParams)

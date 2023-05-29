@@ -3,7 +3,6 @@ import { getFilters } from '@/app/services/getFilters'
 
 import { DropdownComponent } from '../dropdown/dropdown.component'
 export const FilterNavBar = async ({ context }) => {
-  console.log('search', context)
   const filters = await getFilters(context.searchParams)
 
   const queryParams = new URLSearchParams(context.searchParams)

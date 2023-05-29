@@ -16,7 +16,9 @@ export function ListOfOffers (props: { initOffers: Offer[] }, context: any) {
 
   useEffect(() => {
     setOffers(initOffers)
+    setPage(1)
   }, [initOffers])
+
   useEffect(() => {
     if (inView) {
       const url = new URL(`${location.origin}/api/getOffers${location.search}`)
@@ -33,7 +35,6 @@ export function ListOfOffers (props: { initOffers: Offer[] }, context: any) {
     <ul className='max-w-2xl gap-8 flex flex-col justify-center self-center space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400'>
       {offers.map((item, i) => (
         <div key={item.id} ref={ref}>
-          {i === offers.length - 1 && 'eeeend'}
           <CardOffer
             key={item.id}
             offer={item}

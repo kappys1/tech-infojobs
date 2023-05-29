@@ -3,7 +3,7 @@
 import { Facet, FacetValue } from '@/app/model/filters'
 import { Dropdown, DropdownOptions } from 'flowbite'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useTransition } from 'react'
+import React, { useEffect } from 'react'
 import { DropdownItemComponent } from './dropdownItem.component'
 
 interface DropdownComponentProps {
@@ -17,7 +17,6 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
   const targetRef = React.useRef(null)
   const triggerRef = React.useRef(null)
   const dropdown = React.useRef(null)
-  const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
   const [value, setValue] = React.useState<FacetValue | null>(null)
@@ -57,12 +56,10 @@ export const DropdownComponent: React.FC<React.PropsWithChildren<DropdownCompone
   }
 
   const refreshParams = (url: URL) => {
-    startTransition(() => {
-      router.replace(url.toString(), {
-        forceOptimisticNavigation: true
-      })
-      dropdown.current?.hide()
+    router.replace(url.toString(), {
+      forceOptimisticNavigation: true
     })
+    dropdown.current?.hide()
   }
 
   return (
