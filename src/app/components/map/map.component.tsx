@@ -20,7 +20,7 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
 
   const createHandleOnClick =
     (id: number | string | undefined, latitude: number, longitude: number) => () => {
-      const expansionZoom = Math.min(indexCluster.getClusterExpansionZoom(id), 20)
+      const expansionZoom = Math.min(indexCluster.current.getClusterExpansionZoom(id), 20)
       mapRef.current?.setZoom && mapRef.current?.setZoom(expansionZoom)
       mapRef.current?.panTo({ lat: latitude, lng: longitude })
     }

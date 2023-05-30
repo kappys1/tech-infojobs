@@ -2,7 +2,7 @@
 
 import debounce from 'just-debounce-it'
 import { useRouter } from 'next/navigation'
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 interface InputProps {
   label: string
   placeholder: string
@@ -11,21 +11,28 @@ interface InputProps {
 
 export const Input: FC<InputProps> = ({ label, placeholder, id = 'input' }) => {
   const router = useRouter()
-  const queryParams = new URLSearchParams(location.search)
-  const value = queryParams.get('q') ?? ''
-  const handleOnTypeDebounced = debounce((value) => {
-    const url = new URL(location.href)
+  const location = useRef<any>()
+  const [defaultValue, setDefaultValue] = useState('')
+  const handleOnTypeDebounced = debounce((value: string) => {
+    const url = new URL(location.current.href)
     url.searchParams.set('q', value)
     router.replace(url.toString(), {
       forceOptimisticNavigation: true
     })
   }, 500)
 
+  useEffect(() => {
+    location.current = window.location
+    const queryParams = new URLSearchParams(location.current.search)
+    const value = queryParams.get('q') ?? ''
+    setDefaultValue(value)
+  }, [])
+
   return (
     <div className='w-full py-8 px-4 order-2 md:order-1 md:p-0 md:w-1/2'>
       <form
         className='flex items-center'
-        onSubmit={(e) => {
+        onSubmit={(e: any) => {
           e.preventDefault()
           handleOnTypeDebounced(e.target[0].value)
         }}
@@ -51,7 +58,7 @@ export const Input: FC<InputProps> = ({ label, placeholder, id = 'input' }) => {
           </div>
           <input
             type='text'
-            defaultValue={value}
+            defaultValue={defaultValue}
             onChange={(e) => handleOnTypeDebounced(e.target.value)}
             id={id}
             className='block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'

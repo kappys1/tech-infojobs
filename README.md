@@ -15,8 +15,9 @@ Esta interfaz cuenta con la posibilidad de filtrar por categorias, palabras clav
 - ✅ Filtrar por categorias, palabras claves y localización.
 - ✅ Ordenar por fecha de publicación, relevancia y otros.
 - ✅ Mostrar ofertas de trabajo en un mapa
-- ✅ Agrupar las ofertas de trabajo en el mapa
-- ✅ Compartir lista de trabajo por url
+- ✅ Cluster de ofertas de trabajo
+- ✅ Compartir lista de filtrado por url
+- ✅ Night Mode
 - ❌ Login usuario
 - ❌ Mostrar detalle de la oferta laboral.
 - ❌ Añadir ofertas de trabajo a favoritos.

@@ -10,6 +10,7 @@ export function ListOfOffers (
   props: { initOffers: Offer[], page: number, totalPages: number, totalResults: number }
 ) {
   const listRef = useRef(null)
+  const location = useRef<Location>()
   const { initOffers, page = 1, totalPages } = props
   const [offers, setOffers] = useState(initOffers)
   const [currentPage, setCurrentPage] = useState(page)
@@ -27,7 +28,7 @@ export function ListOfOffers (
 
   useEffect(() => {
     if (inView && currentPage + 1 < allPages) {
-      const url = new URL(`${location.origin}/api/getOffers${location.search}`)
+      const url = new URL(`${location.current?.origin}/api/getOffers${location.current?.search}`)
       url.searchParams.set('page', `${currentPage + 1}`)
       void fetch(url.toString()).then(async (val: any) => {
         const { listOfOffers, totalPages } = await val.json()
@@ -38,6 +39,10 @@ export function ListOfOffers (
       })
     }
   }, [inView])
+
+  useEffect(() => {
+    location.current = window.location
+  }, [])
 
   return (
     <div id='list'>

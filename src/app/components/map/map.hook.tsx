@@ -58,8 +58,7 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
 
   // night mode
   useEffect(() => {
-
-    const changeDarkMode = () =>  checkTheme();
+    const changeDarkMode = () => checkTheme()
 
     window.addEventListener('theme-changed', changeDarkMode)
     return () => window.removeEventListener('theme-changed', changeDarkMode)
@@ -68,7 +67,7 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
   const handleApiLoaded = ({ map }: any) => {
     // use map and maps objects
     mapRef.current = map
-    checkTheme();
+    checkTheme()
   }
 
   return { mapRef, bounds, setBounds, clusters, setZoom, defaultProps, indexCluster, handleApiLoaded }

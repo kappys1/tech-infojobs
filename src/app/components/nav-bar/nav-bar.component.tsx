@@ -8,7 +8,6 @@ export const NavBar = () => {
     <nav className='bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10'>
       <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
         <a href='/' className='flex items-center gap-1'>
-          <span className='pb-[0.3rem] self-center text-blue-infojobs-500 text-3xl font-bold whitespace-nowrap dark:text-gray-50'>Tech</span>
           <Logo />
         </a>
         <Input label='Search' placeholder='Busca tu oferta de empleo por puesto, empresa o palabra clave' id='search' />

@@ -2,7 +2,7 @@
 import { getFilters } from '@/app/services/getFilters'
 
 import { DropdownComponent } from '../dropdown/dropdown.component'
-export const FilterNavBar = async ({ context }) => {
+export const FilterNavBar = async ({ context }: any) => {
   const filters = await getFilters(context.searchParams)
 
   const queryParams = new URLSearchParams(context.searchParams)

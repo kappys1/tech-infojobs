@@ -74,3 +74,10 @@ export interface Offer {
   description: string
   highlights: Upsellings
 }
+
+interface APIOfferReturn {
+  listOfOffers: Offer[]
+  currentPage: number
+  totalPages: number
+  totalResults: number
+}

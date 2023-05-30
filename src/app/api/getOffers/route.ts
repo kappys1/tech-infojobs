@@ -1,4 +1,3 @@
-import { Offer } from '@/app/model/offer'
 import { getInfoJobsOffers } from '@/app/services/getOffers'
 import { NextResponse } from 'next/server'
 
@@ -10,7 +9,7 @@ export async function GET (request: Request) {
   if (page == null) return new Response('Missing page', { status: 400 })
 
   searchParams.delete('page')
-  const offer: Offer[] = await getInfoJobsOffers({ page, queryParams })
+  const offer = await getInfoJobsOffers({ page, queryParams })
 
   try {
     return NextResponse.json(offer)

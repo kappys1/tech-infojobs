@@ -1,4 +1,4 @@
-import { APIResultOffers, Offer } from '../model/offer'
+import { APIOfferReturn, APIResultOffers, Offer } from '../model/offer'
 import { getDetailOffer } from './getDetailOffer'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
@@ -29,10 +29,10 @@ export async function getOffers (page = '1', queryParams: QueryParams = {}) {
   return responseJson
 }
 
-export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: string, queryParams: QueryParams }) {
+export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: string, queryParams: QueryParams }): Promise<APIOfferReturn> {
   const { items, currentPage, totalPages, totalResults } = await getOffers(page, queryParams)
   if (!items) {
-    return []
+    return { currentPage: 0, listOfOffers: [] as any, totalPages: 0, totalResults: 0 }
   }
   const listOfOffers: Offer[] = await Promise.all(items.map(async (item) => {
     const detailOffer = await getDetailOffer(item.id)

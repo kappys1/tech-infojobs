@@ -17,11 +17,13 @@ React.PropsWithChildren<DropdownComponentProps>
 > = ({ children, options, label, facet }) => {
   const targetRef = React.useRef(null)
   const triggerRef = React.useRef(null)
-  const dropdown = React.useRef(null)
+  const location = React.useRef<Location>()
+  const dropdown = React.useRef<Dropdown>()
 
   const router = useRouter()
   const [value, setValue] = React.useState<FacetValue | null>(null)
   useEffect(() => {
+    location.current = window.location
     dropdown.current = new Dropdown(targetRef.current, triggerRef.current, {
       placement: 'bottom',
       triggerType: 'click',
@@ -29,7 +31,7 @@ React.PropsWithChildren<DropdownComponentProps>
       offsetDistance: 10,
       ...options
     })
-    const query = new URLSearchParams(location.search)
+    const query = new URLSearchParams(location.current.search)
     const value = query.get(facet.key)
     if (value) {
       const facetValue = facet.values.find(
@@ -42,14 +44,14 @@ React.PropsWithChildren<DropdownComponentProps>
   }, [])
 
   const handlerClickItem = (value: FacetValue) => {
-    const url = new URL(location.href)
+    const url = new URL(location.current?.href ?? '')
     setValue(value)
     url.searchParams.set(facet.key, value.key)
     refreshParams(url)
   }
 
   const handlerResetFilter = () => {
-    const url = new URL(location.href)
+    const url = new URL(location.current?.href ?? '')
     setValue(null)
     url.searchParams.delete(facet.key)
     if (!url.searchParams.has('province') && url.searchParams.has('city')) {

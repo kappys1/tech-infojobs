@@ -2,8 +2,8 @@
 import { useEffect, useRef } from 'react'
 
 export const ThemeSwitcherComponent = () => {
-  const toggleDarkIconRef = useRef(null)
-  const toggleLightIconRef = useRef(null)
+  const toggleDarkIconRef = useRef<any>()
+  const toggleLightIconRef = useRef<any>()
 
   // Change the icons inside the button based on previous settings
   useEffect(() => {
@@ -14,10 +14,10 @@ export const ThemeSwitcherComponent = () => {
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       document.documentElement.classList.add('dark')
-      toggleLightIconRef.current.classList.remove('hidden')
+      toggleLightIconRef.current?.classList.remove('hidden')
     } else {
       document.documentElement.classList.remove('dark')
-      toggleDarkIconRef.current.classList.remove('hidden')
+      toggleDarkIconRef.current?.classList.remove('hidden')
     }
   }, [])
 
