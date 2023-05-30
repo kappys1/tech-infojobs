@@ -1,4 +1,5 @@
 'use client'
+import { useDropdown } from '@/app/hooks/useDropdown'
 import { Facet, FacetValue } from '@/app/model/filters'
 import { Dropdown, DropdownOptions } from 'flowbite'
 import { useRouter } from 'next/navigation'
@@ -15,22 +16,14 @@ interface DropdownComponentProps {
 export const DropdownComponent: React.FC<
 React.PropsWithChildren<DropdownComponentProps>
 > = ({ options, facet }) => {
-  const targetRef = React.useRef(null)
-  const triggerRef = React.useRef(null)
+  const { dropdown, targetRef, triggerRef } = useDropdown()
   const location = React.useRef<Location>()
-  const dropdown = React.useRef<Dropdown>()
 
   const router = useRouter()
   const [value, setValue] = React.useState<FacetValue | null>(null)
+
   useEffect(() => {
     location.current = window.location
-    dropdown.current = new Dropdown(targetRef.current, triggerRef.current, {
-      placement: 'bottom',
-      triggerType: 'click',
-      offsetSkidding: 0,
-      offsetDistance: 10,
-      ...options
-    })
     const query = new URLSearchParams(location.current.search)
     const value = query.get(facet.key)
     if (value) {
