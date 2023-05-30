@@ -42,12 +42,12 @@ export const Map = ({ mapOffers, center }: MapComponentProps) => {
         defaultZoom={7}
         onGoogleApiLoaded={handleApiLoaded}
         onChange={handleOnChange}
-        sty
         options={{
           disableDefaultUI: true,
           fullscreenControl: true,
           zoomControl: true,
-          scaleControl: true
+          scaleControl: true,
+          styles: defaultProps.style
         }}
       >
         {clusters.map((cluster) => {
