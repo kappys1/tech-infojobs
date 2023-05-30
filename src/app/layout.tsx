@@ -14,8 +14,33 @@ export default function RootLayout ({
 }: {
   children: React.ReactNode
 }) {
+  const title = 'TechInfoJobs - Portal de búsqueda de empleo líder en el sector tecnológico'
+  const description = 'Descubre las mejores ofertas de empleo Tech y acelera tu carrera profesional en el sector tecnológico con TechJob. Conectamos a profesionales altamente cualificados con oportunidades laborales a medida. ¡Explora ahora y encuentra tu próximo desafío en TechJob!'
+  const image = 'https://infojobs.tech/og.avif'
   return (
     <html lang='en'>
+      <head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+        <title>{title}</title>
+        <meta name='description' content={description} />
+        <meta name='theme-color' content='#167DB7' />
+        <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
+        <link rel='mask-icon' href='favicon.svg' color='#000000' />
+        <meta name='Keywords' content='trabajo, empleo, ofertas de trabajo, bolsa de trabajo, sector tecnológico, tech' />
+        <meta property='og:url' content='https://infojobs.tech' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content={title} />
+        <meta property='og:description' content={description} />
+        <meta property='og:image' content={image} />
+
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:site' content='@alexmarcosg' />
+        <meta name='twitter:creator' content='@alexmarcosg' />
+        <meta name='twitter:title' content={title} />
+        <meta name='twitter:description' content={description} />
+        <meta name='twitter:image' content={image} />
+      </head>
       <body className={`${inter.className} bg-[#f2f2f2] dark:bg-gray-900`}>
         <NavBar />
         {children}
