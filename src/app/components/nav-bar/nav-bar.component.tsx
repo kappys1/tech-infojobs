@@ -2,7 +2,6 @@ import { Auth } from '../auth/auth'
 import { Input } from '../input/input.component'
 import { Logo } from '../logo/logo.component'
 import { ThemeSwitcherComponent } from '../themeSwitcher/themeSwitcher.component'
-import { NavBarAuthLink } from './nav-bar-auth-link.component'
 import { NavBarLink } from './nav-bar-link.component'
 
 export const NavBar = () => {
@@ -45,9 +44,7 @@ export const NavBar = () => {
         >
           <div className='font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
             <NavBarLink href='https://www.infojobs.net/'>Infojobs</NavBarLink>
-            <NavBarAuthLink href=''>Mis ofertas</NavBarAuthLink>
             <Auth />
-
             <ThemeSwitcherComponent />
           </div>
         </div>
