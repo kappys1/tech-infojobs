@@ -11,7 +11,7 @@ export const metadata = async function generateMetadata (): Promise<Metadata> {
       icon: '/favicon.ico'
     },
     themeColor: '#167DB7',
-    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
     keywords: 'trabajo, empleo, ofertas de trabajo, bolsa de trabajo, sector tecnológico, tech',
     openGraph: {
       images: [image],

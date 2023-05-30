@@ -49,7 +49,7 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
 
   const checkTheme = () => {
     const theme = localStorage.getItem('color-theme')
-    if (theme === 'dark') {
+    if (theme === 'dark' || document.documentElement.classList.contains('dark')) {
       mapRef.current?.setOptions({ styles: getNightModeStyles() })
     } else {
       mapRef.current?.setOptions({ styles: {} })
