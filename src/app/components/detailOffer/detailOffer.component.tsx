@@ -12,14 +12,14 @@ export const DetailOffer = ({ offer }: { offer: APIOfferDetail }) => {
           <a className='mb-8 text-sm font-normal dark:text-gray-300 text-blue-infojobs-400 hover:underline' href={offer.profile.websiteUrl}>{offer.profile.name}</a>
           <div className='flex gap-8'>
             <div className='flex gap-2 flex-col'>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.city}, {offer.province.value} ({offer.country.value})</p>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>Jornada {offer.journey.value}</p>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.contractType.value}</p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.city}, {offer.province.value} ({offer.country.value})</p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>Jornada {offer.journey.value}</p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.contractType.value}</p>
             </div>
             <div className='flex gap-2 flex-col'>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.experienceMin.value}</p>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'><OfferTime updated={new Date(offer.updateDate)} published={new Date(offer.creationDate)} /></p>
-              <p className='text-xs font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.salaryDescription}</p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.experienceMin.value}</p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'><OfferTime updated={new Date(offer.updateDate)} published={new Date(offer.creationDate)} /></p>
+              <p className='text-[0.85rem] font-normal text-gray-700 dark:text-gray-300 flex items-center gap-2'>{offer.salaryDescription}</p>
             </div>
           </div>
         </div>

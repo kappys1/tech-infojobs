@@ -21,9 +21,23 @@ Esta interfaz cuenta con la posibilidad de filtrar por categorias, palabras clav
 - ✅ Login usuario
 - ✅ Mostrar detalle de la oferta laboral.
 - ✅ Apuntarte a oferta laboral. (si estas logueado no hace falta, si no, te envía al login.)
-- ❌ Añadir ofertas de trabajo a favoritos. -> No es posible, la API de Infojobs no lo permite.
 - ❌ Crear carta de presentación a partir del usuario logeado y la oferta de trabajo seleccionada. (con openai)
--
+- ❌ Añadir ofertas de trabajo a favoritos. -> No es posible, la API de Infojobs no lo permite.
+- ❌ Ver los estados de los procesos de selección
+
 
 ## Cosas a mejorar
-- En vez de mostrar en el mapa la ciudad,
+- En vez de mostrar en el mapa la ciudad, mostrar la dirección exacta.
+- Mostrar el nombre de la empresa en el mapa.
+- Algunas renderizaciones.
+
+## Tecnologías
+
+- Next.js
+- Tailwind CSS
+- use SWR
+
+
+## Porque Next.js
+
+- Para aprender. proyecto totalmente formativo.
