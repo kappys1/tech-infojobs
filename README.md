@@ -1,13 +1,12 @@
 # InfoJobs Tech
+Proyecto para la Hackathon the infojobs.
 
 Clon de la aplicación de infojobs mejorando la experiencia de usuario y la interfaz de usuario.
 Este clon solo mostrará las ofertas de trabajo tech.
 
-
 ## Idea
 
-La idea es crear una aplicación que mejore la experiencia de usuario y la interfaz de usuario de la aplicación de infojobs. Para ello se utilizará la API de Infojobs para obtener los datos de las ofertas de trabajo y se mostrarán en una interfaz de usuario más atractiva y fácil de usar.
-Esta interfaz cuenta con la posibilidad de filtrar por categorias, palabras claves y localización.
+Crear una aplicación que mejore la experiencia y la interfaz de usuario de la aplicación de infojobs. Además de añadir alguna funcionalidad de recomendación para mejorar tu carta de presentación o curriculum vitae a la hora de aplicar a una oferta de trabajo. (por hacer esto último.)
 
 ## Tareas
 
@@ -20,7 +19,7 @@ Esta interfaz cuenta con la posibilidad de filtrar por categorias, palabras clav
 - ✅ Night Mode
 - ✅ Login usuario
 - ✅ Mostrar detalle de la oferta laboral.
-- ✅ Apuntarte a oferta laboral. (si estas logueado no hace falta, si no, te envía al login.)
+- ✅ Apuntarte a oferta laboral. (Ahora mismo te redirige a infojobs y te mantiene el login gracias al oauth2 de infojobs)
 - ❌ Crear carta de presentación a partir del usuario logeado y la oferta de trabajo seleccionada. (con openai)
 - ❌ Añadir ofertas de trabajo a favoritos. -> No es posible, la API de Infojobs no lo permite.
 - ❌ Ver los estados de los procesos de selección
@@ -30,6 +29,7 @@ Esta interfaz cuenta con la posibilidad de filtrar por categorias, palabras clav
 - En vez de mostrar en el mapa la ciudad, mostrar la dirección exacta.
 - Mostrar el nombre de la empresa en el mapa.
 - Algunas renderizaciones.
+- Añadir tests
 
 ## Tecnologías
 
