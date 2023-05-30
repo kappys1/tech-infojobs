@@ -1,9 +1,10 @@
 'use client'
 import { useDropdown } from '@/app/hooks/useDropdown'
 import { Facet, FacetValue } from '@/app/model/filters'
-import { Dropdown, DropdownOptions } from 'flowbite'
+import { DropdownOptions } from 'flowbite'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { DropdownItemComponent } from './dropdownItem.component'
 
 interface DropdownComponentProps {
@@ -21,6 +22,11 @@ React.PropsWithChildren<DropdownComponentProps>
 
   const router = useRouter()
   const [value, setValue] = React.useState<FacetValue | null>(null)
+  const topReference = 'ref-top'
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 0
+  })
 
   useEffect(() => {
     location.current = window.location
@@ -34,6 +40,7 @@ React.PropsWithChildren<DropdownComponentProps>
         setValue(facetValue)
       }
     }
+    ref(document.getElementById(topReference))
   }, [])
 
   const handlerClickItem = (value: FacetValue) => {
@@ -54,7 +61,9 @@ React.PropsWithChildren<DropdownComponentProps>
   }
 
   const refreshParams = (url: URL) => {
-    url.hash = 'ref-top'
+    console.log(ref, inView)
+    url.hash = inView ? '' : topReference
+    console.log(url)
     router.replace(url.toString(), {
       forceOptimisticNavigation: true
     })

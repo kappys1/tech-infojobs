@@ -1,5 +1,5 @@
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+import useSwr from 'swr'
 
-export const useSWR = (props: ) => {
+const fetcher = async (...args: any) => await fetch(...args).then(async res => await res.json())
 
-}
+export const useSWR = (url: string, config?: RequestInit) => useSwr(url, async (url) => await fetcher(url, config))

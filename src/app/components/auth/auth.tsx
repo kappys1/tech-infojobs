@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import useAuth from '@/app/hooks/useToken'
+import { useAuth } from '@/app/hooks/useToken'
+import { useUser } from '@/app/hooks/useUser'
 import { useSearchParams } from 'next/navigation'
 import { Loading } from '../loading/loading.component'
 import { NavBarLink } from '../nav-bar/nav-bar-link.component'
@@ -14,9 +15,10 @@ export const Auth = () => {
   const callback = 'http://www.localhost:3000/'
   const scope = 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE'
 
-  const { loading, user, signOut } = useAuth(code)
+  const { signOut } = useAuth(code)
+  const { user, isLoading } = useUser()
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />
   }
   return !user

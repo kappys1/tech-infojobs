@@ -1,4 +1,4 @@
-import { APIOfferDetail, OfferDetail } from '../model/offerDetail'
+import { APIOfferDetail } from '../model/offerDetail'
 
 const infoJobsToken = process.env.INFOJOBS_TOKEN ?? ''
 
@@ -15,15 +15,5 @@ export async function getDetailOffer (id = '') {
 
   const item: APIOfferDetail = await res.json()
 
-  const {
-    description,
-    upsellings
-  } = item
-
-  const offerDetail: OfferDetail = {
-    description,
-    highlights: upsellings
-  }
-
-  return offerDetail
+  return item
 }
