@@ -33,10 +33,12 @@ export const getMapOffers = async ({ page = '1', queryParams = {} }: { page?: st
     const country = countryDict.find(country => country.id === province?.parent)
 
     return { city, province, country, count: facetCity.count }
-  }).filter((facet: FacetLocation) => facet.city && facet.province && facet.country)
+  }) || []
+
+  const facetsLocationsFiltered = facetsLocations.filter((facet: FacetLocation) => facet.city && facet.province && facet.country)
 
   const coordinates = await Promise.all(
-    facetsLocations.map(async (facet: FacetLocation) => {
+    facetsLocationsFiltered.map(async (facet: FacetLocation) => {
       const coordinates = await getCoordinates(facet)
       return { ...facet, coordinates }
     })
