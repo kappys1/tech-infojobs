@@ -1,8 +1,11 @@
 import { FilterNavBar } from './components/filter/filter.component'
 import { ListOfOffers } from './components/listOffers/listOffers'
 import { Map } from './components/map/map.component'
+import { metadata } from './metadata'
 import { getMapOffers } from './services/getMapOffers'
 import { getInfoJobsOffers } from './services/getOffers'
+
+export const generateMetadata = async () => await metadata()
 
 export default async function Home (context: any) {
   const params = {
@@ -23,6 +26,7 @@ export default async function Home (context: any) {
 
   return (
     <main className='flex flex-col justify-center self-center m-auto p-8 max-w-screen-2xl'>
+
       <section className=''>
         <div className='py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12'>
           <h1 className=' mb-4 text-4xl font-extrabold tracking-tight leading-none text-blue-infojobs-500  md:text-5xl lg:text-6xl lg:leading-[1.2] dark:text-blue-infojobs-400'>

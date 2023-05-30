@@ -23,7 +23,6 @@ export function ListOfOffers (
   useEffect(() => {
     setOffers(initOffers)
     setCurrentPage(1)
-    console.log('initOffers', initOffers)
   }, [initOffers])
 
   useEffect(() => {
@@ -35,7 +34,6 @@ export function ListOfOffers (
         setOffers([...offers, ...listOfOffers])
         setCurrentPage(currentPage + 1)
         setAllPages(totalPages)
-        console.log('listOfOffers', listOfOffers)
       })
     }
   }, [inView])
