@@ -4,16 +4,16 @@ import Supercluster from 'supercluster'
 import { MapComponentProps } from './map.component'
 import { getNightModeStyles } from './map.utils'
 
-export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
-  const mapRef = useRef<any>(null)
+export const useInitMap = ({ mapOffers, center = {} }: MapComponentProps) => {
+  const mapRef = useRef<any>()
   const [bounds, setBounds] = useState<any>([])
   const [clusters, setClusters] = useState < Array<Supercluster.PointFeature<any>>>([])
   const [zoom, setZoom] = useState(10)
   const indexCluster = useRef<any>(null)
   const [defaultProps, setDefaultProps] = useState({
     center: {
-      lat: center ? center.lat : mapOffers[0]?.coordinates.lat,
-      lng: center ? center.lng : mapOffers[0]?.coordinates.lng
+      lat: center?.lat ?? mapOffers[0]?.coordinates.lat,
+      lng: center?.lng ?? mapOffers[0]?.coordinates.lng
     },
     style: {}
   })

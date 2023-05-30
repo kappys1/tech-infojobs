@@ -61,9 +61,7 @@ React.PropsWithChildren<DropdownComponentProps>
   }
 
   const refreshParams = (url: URL) => {
-    console.log(ref, inView)
     url.hash = inView ? '' : topReference
-    console.log(url)
     router.replace(url.toString(), {
       forceOptimisticNavigation: true
     })

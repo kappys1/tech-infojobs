@@ -15,11 +15,10 @@ export const Auth = () => {
   const callback = 'http://www.localhost:3000/'
   const scope = 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE'
 
-  const { signOut } = useAuth(code)
+  const { signOut, loading: isAuthLoading } = useAuth(code)
   const { user, isLoading } = useUser()
 
-  console.log('useeeer', user)
-  if (isLoading) {
+  if (isLoading || isAuthLoading) {
     return <Loading />
   }
   return !user

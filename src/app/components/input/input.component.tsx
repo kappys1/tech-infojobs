@@ -16,7 +16,6 @@ export const Input: FC<InputProps> = ({ label, placeholder, id = 'input' }) => {
   const handleOnTypeDebounced = debounce((value: string) => {
     const url = new URL(location.current.href)
     url.pathname = '/'
-    console.log(url)
     url.searchParams.set('q', value)
     router.replace(url.toString(), {
       forceOptimisticNavigation: true

@@ -1,24 +1,20 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef } from 'react'
-import { useSWR } from './useSWR'
+import useSWR from 'swr'
+import { fetcher } from './useSWR'
 
 export const useAuth = (code?: string | null) => {
   const router = useRouter()
-  const sessionStorage = useRef<Storage>()
 
   const handleSignOut = () => {
-    sessionStorage.current?.removeItem('token')
+    window.sessionStorage?.removeItem('token')
     router.refresh()
   }
 
-  useEffect(() => {
-    sessionStorage.current = window.sessionStorage
-  }, [])
-
-  const token = sessionStorage.current?.getItem('token') ?? ''
+  const token = window.sessionStorage?.getItem('token') ?? ''
   const errorTokens = ['invalid_grant', 'invalid_token']
-  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_API_BASE}/api/auth?code=${code}`)
+
+  const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_API_BASE}/api/auth?code=${code}`, fetcher)
 
   if (token) {
     return { token, loading: false, error: false, signOut: handleSignOut }
@@ -32,9 +28,13 @@ export const useAuth = (code?: string | null) => {
     if (!code) router.replace('/')
 
     if (data) {
-      sessionStorage.current?.setItem('token', data.access_token)
-      router.replace('/')
-      router.refresh()
+      window.sessionStorage?.setItem('token', data.access_token)
+      // workaround to refresh the page
+      setTimeout(() => {
+        router.replace('/')
+        router.refresh()
+      }, 100)
+
       return { token: data, loading: false, error: false, signOut: handleSignOut }
     }
   }
