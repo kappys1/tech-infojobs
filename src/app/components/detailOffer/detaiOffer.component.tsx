@@ -1,3 +1,4 @@
+
 import { APIOfferDetail } from '@/app/model/offerDetail'
 import { OfferTime } from '../cardOffer/cardOffer.component'
 

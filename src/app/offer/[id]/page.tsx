@@ -5,7 +5,7 @@ import { getCoordinates } from '@/app/services/getCoordinates'
 import { getDetailOffer } from '@/app/services/getDetailOffer'
 import { getFacetFromOffer } from './utils'
 
-export default async function OfferPage ({ params }) {
+export default async function OfferPage ({ params }: any) {
   const offer = await getDetailOffer(params.id)
 
   const facet: FacetLocation = await getFacetFromOffer(offer)

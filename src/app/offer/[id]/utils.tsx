@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { FacetLocation } from '@/app/model/mapOffer'
 import { APIOfferDetail } from '@/app/model/offerDetail'
 import { getDictionary } from '@/app/services/getDictionary'

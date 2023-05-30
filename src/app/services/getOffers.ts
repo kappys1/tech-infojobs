@@ -76,7 +76,7 @@ export async function getInfoJobsOffers ({ page = '1', queryParams }: { page: st
       teleworking: teleworking?.value ?? 'No especificado',
       author,
       description: detailOffer.description,
-      highlights: detailOffer.highlights
+      highlights: detailOffer.upsellings
     }
   }))
 
