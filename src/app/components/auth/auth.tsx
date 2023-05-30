@@ -11,8 +11,8 @@ import { UserMenu } from './userMenu.component'
 export const Auth = () => {
   const searchParams = useSearchParams()
   const code = searchParams.get('code')
-  const clientId = '444e44269d5f4883aa6587ddf7f9d7d4'
-  const callback = 'http://www.localhost:3000/'
+  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
+  const callback = process.env.NEXT_PUBLIC_REDIRECT_URI
   const scope = 'MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_EXPERIENCE'
 
   const { signOut, loading: isAuthLoading } = useAuth(code)

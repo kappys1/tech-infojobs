@@ -7,10 +7,10 @@ export async function GET (req: NextRequest) {
 
   const url = new URL('https://www.infojobs.net/oauth/authorize')
   url.searchParams.set('grant_type', 'authorization_code')
-  url.searchParams.set('client_id', `${process.env.CLIENT_ID}`)
+  url.searchParams.set('client_id', `${process.env.NEXT_PUBLIC_CLIENT_ID}`)
   url.searchParams.set('client_secret', `${process.env.CLIENT_SECRET}`)
   url.searchParams.set('code', `${code}`)
-  url.searchParams.set('redirect_uri', `${process.env.REDIRECT_URI}`)
+  url.searchParams.set('redirect_uri', `${process.env.NEXT_PUBLIC_REDIRECT_URI}`)
   const res = await fetch(url, {
     method: 'POST'
   })
