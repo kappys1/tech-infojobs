@@ -21,7 +21,7 @@ export const getMapOffers = async ({ page = '1', queryParams = {} }: { page?: st
   queryParams.maxResults = '1'
   const { facets = [] } = await getOffers(page, queryParams)
 
-  const facetsCity = facets.filter(facet => facet.key === 'city')[0].values
+  const facetsCity = facets.filter(facet => facet.key === 'city')[0]?.values ?? []
 
   const countryDict = getDictionary('country')
   const provinceDict = getDictionary('province')
