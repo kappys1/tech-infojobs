@@ -39,6 +39,5 @@ export const useAuth = (code?: string | null) => {
     }
   }
 
-  // router.replace('/')
   return { token: undefined, loading: isLoading, error, signOut: handleSignOut }
 }

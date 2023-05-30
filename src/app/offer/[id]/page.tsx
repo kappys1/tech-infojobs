@@ -1,4 +1,4 @@
-import { DetailOffer } from '@/app/components/detailOffer/detaiOffer.component'
+import { DetailOffer } from '@/app/components/detailOffer/detailOffer.component'
 import { Map } from '@/app/components/map/map.component'
 import { FacetLocation } from '@/app/model/mapOffer'
 import { getCoordinates } from '@/app/services/getCoordinates'

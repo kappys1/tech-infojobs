@@ -10,14 +10,13 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
   const [clusters, setClusters] = useState < Array<Supercluster.PointFeature<any>>>([])
   const [zoom, setZoom] = useState(10)
   const indexCluster = useRef<any>(null)
-
-  const defaultProps = {
+  const [defaultProps, setDefaultProps] = useState({
     center: {
       lat: center ? center.lat : mapOffers[0]?.coordinates.lat,
       lng: center ? center.lng : mapOffers[0]?.coordinates.lng
     },
-    style: document.documentElement.classList.contains('dark') ? getNightModeStyles() : {}
-  }
+    style: {}
+  })
 
   const points: Array<Supercluster.PointFeature<any>> = mapOffers.map(map => ({
     type: 'Feature',
@@ -61,6 +60,9 @@ export const useInitMap = ({ mapOffers, center }: MapComponentProps) => {
   useEffect(() => {
     const changeDarkMode = () => checkTheme()
     window.addEventListener('theme-changed', changeDarkMode)
+    if (document.documentElement.classList.contains('dark')) {
+      setDefaultProps({ ...defaultProps, style: getNightModeStyles() })
+    }
     return () => window.removeEventListener('theme-changed', changeDarkMode)
   }, [])
 

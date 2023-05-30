@@ -18,6 +18,7 @@ export const Auth = () => {
   const { signOut } = useAuth(code)
   const { user, isLoading } = useUser()
 
+  console.log('useeeer', user)
   if (isLoading) {
     return <Loading />
   }
