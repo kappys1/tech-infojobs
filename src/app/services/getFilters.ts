@@ -22,7 +22,7 @@ export async function getFilters (queryParams: QueryParams = {}) {
     }
   )
 
-  const { facets }: { facets: Facet[] } = await res.json()
+  const { facets = [] }: { facets: Facet[] } = await res.json()
 
   const facetFiltered = facets.filter(facet => facet.key !== 'category')
 
