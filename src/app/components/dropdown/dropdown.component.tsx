@@ -14,7 +14,7 @@ interface DropdownComponentProps {
 
 export const DropdownComponent: React.FC<
 React.PropsWithChildren<DropdownComponentProps>
-> = ({ children, options, label, facet }) => {
+> = ({ options, facet }) => {
   const targetRef = React.useRef(null)
   const triggerRef = React.useRef(null)
   const location = React.useRef<Location>()
@@ -72,8 +72,8 @@ React.PropsWithChildren<DropdownComponentProps>
     <div className='flex flex-col gap-2 justify-center text-center pb-4 2xl:p-0 '>
       <button
         ref={triggerRef}
-        id='dropdownBottomButton'
-        className='text-blue-infojobs-500 bg-white hover:bg-blue-infojobs-600 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:text-blue-infojobs-50 dark:bg-blue-infojobs-500 dark:hover:bg-blue-infojobs-600 dark:focus:ring-blue-800'
+        id={`dropdownBottomButton-${facet.key}`}
+        className='text-blue-infojobs-500 bg-white hover:bg-blue-infojobs-600 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:text-blue-infojobs-50 dark:bg-blue-infojobs-400 dark:hover:bg-blue-infojobs-600 dark:focus:ring-blue-800'
         type='button'
       >
         <p className={`${value?.value ? 'font-bold' : ''}`}>
@@ -95,13 +95,13 @@ React.PropsWithChildren<DropdownComponentProps>
       </button>
       {/* <div className='text-blue-infojobs text-sm h-9'>{}</div> */}
       <div
-        id='dropdownBottom'
+        id={`dropdownButton-${facet.key}`}
         className='z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'
         ref={targetRef}
       >
         <ul
           className='py-2 text-sm text-gray-700 dark:text-gray-200'
-          aria-labelledby='dropdownBottomButton'
+          aria-labelledby={`dropdownBottomButton-${facet.key}`}
         >
           <DropdownItemComponent
             onClick={() => handlerResetFilter()}

@@ -25,7 +25,7 @@ export default async function Home (context: any) {
     <main className='flex flex-col justify-center self-center m-auto p-8 max-w-screen-2xl'>
       <section className=''>
         <div className='py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12'>
-          <h1 className=' mb-4 text-4xl font-extrabold tracking-tight leading-none text-blue-infojobs-500  md:text-5xl lg:text-6xl lg:leading-[1.2] dark:text-blue-infojobs-500'>
+          <h1 className=' mb-4 text-4xl font-extrabold tracking-tight leading-none text-blue-infojobs-500  md:text-5xl lg:text-6xl lg:leading-[1.2] dark:text-blue-infojobs-400'>
             Plataforma líder para conseguir empleo en el sector Tecnológico
           </h1>
           <p className='my-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-200'>Actualmente tenemos <span className='font-bold'>{allOffers}</span> ofertas de trabajo listas para ti</p>
@@ -42,7 +42,7 @@ export default async function Home (context: any) {
       </nav>
       <section className='flex flex-col lg:flex-row mt-6 gap-5'>
         <aside className='w-full lg:w-1/2 order-1 lg:order-0'>
-          <p className='block pb-8 pl-1 text-xl text-blue-infojobs-500 dark:text-blue-infojobs-500'>
+          <p className='block pb-8 pl-1 text-xl text-blue-infojobs-500 dark:text-blue-infojobs-400'>
             {totalResults} ofertas encontradas
           </p>
           <ListOfOffers

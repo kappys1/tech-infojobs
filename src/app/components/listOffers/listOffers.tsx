@@ -48,12 +48,14 @@ export function ListOfOffers (
     <div id='list'>
       <ul ref={listRef} className='w-full lg:max-w-2xl gap-8 flex flex-col justify-center self-center space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400'>
         {offers.map((item, i) => (
-          <CardOffer key={item.id} offer={item} />
+          <li className='w-full list-none' key={item.id}>
+            <CardOffer offer={item} />
+          </li>
         ))}
         {currentPage + 1 < allPages && (
-          <div ref={ref} key='item-skeleton'>
+          <li ref={ref} key='item-skeleton' className='w-full list-none'>
             <CardOfferSkeleton />
-          </div>
+          </li>
         )}
       </ul>
     </div>
