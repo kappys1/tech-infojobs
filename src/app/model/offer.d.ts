@@ -9,6 +9,11 @@ interface APIResultOffers {
   items: APIOfferItem[]
   facets: Facet[]
 }
+interface APIResultsOffersError {
+  error?: string
+  error_description?: string
+  timestamp?: string
+}
 
 interface APIOfferItem {
   id: string

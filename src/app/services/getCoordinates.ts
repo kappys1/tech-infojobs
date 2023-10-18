@@ -2,10 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { FacetLocation } from '../model/mapOffer'
 
-export async function getCoordinates (city: FacetLocation) {
+export async function getCoordinates(city: FacetLocation) {
   const jsonDirectory = path.join(process.cwd(), 'src/app/services/json')
-  const fileContents = fs.readFileSync(jsonDirectory + '/cache.json', { encoding: 'utf-8' })
-  const cache: { [key: string]: { lat: number, lng: number } } = JSON.parse(fileContents)
+  const fileContents = fs.readFileSync(jsonDirectory + '/cache.json', {
+    encoding: 'utf-8',
+  })
+  const cache: { [key: string]: { lat: number; lng: number } } =
+    JSON.parse(fileContents)
   let cityKey = ''
   let cityFind = ''
   try {
@@ -21,8 +24,8 @@ export async function getCoordinates (city: FacetLocation) {
     `https://maps.googleapis.com/maps/api/geocode/json?address=${cityFind}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}`,
     {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
   )
   const { results } = await res.json()
